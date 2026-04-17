@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreIdeaRequest;
-use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IdeaController extends Controller
 {
@@ -13,7 +13,11 @@ class IdeaController extends Controller
      */
     public function index()
     {
-        //
+        $ideas = Auth::user()->ideas;
+
+        return view('idea.index', [
+            'ideas' => $ideas,
+        ]);
     }
 
     /**
@@ -27,7 +31,7 @@ class IdeaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIdeaRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,10 +39,7 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Idea $idea)
-    {
-        //
-    }
+    public function show(Idea $idea) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -51,7 +52,7 @@ class IdeaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateIdeaRequest $request, Idea $idea)
+    public function update(Request $request, Idea $idea)
     {
         //
     }
