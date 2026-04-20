@@ -6,15 +6,17 @@ namespace App\Http\Controllers;
 
 use App\IdeaStatus;
 use App\Models\Idea;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class IdeaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $user = Auth::user();
 
@@ -54,7 +56,12 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Idea $idea) {}
+    public function show(Idea $idea): View
+    {
+        return view('idea.show', [
+            'idea' => $idea,
+        ]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -75,8 +82,10 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Idea $idea): void
+    public function destroy(Idea $idea): RedirectResponse
     {
-        //
+        $idea->delete();
+
+        return to_route('idea.index');
     }
 }
