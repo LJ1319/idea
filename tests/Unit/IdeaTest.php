@@ -25,3 +25,9 @@ it('can have steps', function () {
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1);
 });
+
+it('formats a description using Markdown', function () {
+    $idea = new Idea(['description' => 'Hello *world*']);
+
+    expect($idea->formattedDescription)->toEqual("<p>Hello <em>world</em></p>\n");
+});
