@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\IdeaController;
 use App\Http\Controllers\IdeaImageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StepController;
@@ -21,6 +22,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/ideas/{idea}/image', [IdeaImageController::class, 'destroy'])->name('idea.image.destroy');
 
     Route::patch('/steps/{step}', [StepController::class, 'update'])->name('step.update');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::post('/logout', [SessionsController::class, 'destroy']);
 });
