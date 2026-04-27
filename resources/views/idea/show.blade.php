@@ -3,12 +3,19 @@
         <div class="flex justify-between items-center">
             <a href="{{ route('idea.index') }}" class="flex items-center gap-x-2 text-sm font-medium">
                 <x-icons.arrow-back/>
+
                 Back to Ideas
             </a>
 
             <div class="gap-x-3 flex items-center">
-                <button class="btn btn-outlined">
+                <button
+                    x-data
+                    data-test="edit-idea-button"
+                    class="btn btn-outlined"
+                    @click="$dispatch('open-modal', 'edit-idea')"
+                >
                     <x-icons.external/>
+
                     Edit Idea
                 </button>
 
@@ -96,5 +103,7 @@
                 </div>
             @endif
         </div>
+
+        <x-idea.modal :idea="$idea"/>
     </div>
 </x-layout>
